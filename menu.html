@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<style>
+    .menu{
+        width: 200px;
+        height: 100%;
+        overflow-Y: scroll;
+        border: 1px solid #ccc;
+    }
+    .toggle{
+
+    }
+</style>
+<body>
+<div class="view">
+<self-menu></self-menu>
+</div>
+</body>
+</html>
+<script>
+    var obj=[{"id":0,"name":"aa",childrens:[{"id":3,"name":"aa"},{"id":4,"name":"aa"}]},{"id":1,"name":"aa"},{"id":5,"name":"aa"},{"id":6,"name":"aa"},{"id":7,"name":"aa"}];
+    Vue.component('self-menu',{
+        template:"<div class='menu'>" +
+        "<ul v-for='item in obj'>" +
+        "<li v-if='!item.childrens'>{{item.name}}</li>" +
+        "<li v-else @click='show = !show'>{{item.name}}" +
+        "<ul v-if='show' v-for='items in item.childrens'><li>{{items.name}}</li></ul>" +
+        "</li></ul></div>",
+        data:function () {
+            return {
+                obj:obj,
+                show:true
+            }
+        },
+    })
+    new Vue({
+        el:'.view'
+    })
+</script>
+
